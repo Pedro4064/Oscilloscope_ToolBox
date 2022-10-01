@@ -51,6 +51,8 @@ classdef Oscilloscope_Data
         end
 
         function add_channel_data(obj, channel_name, data_file)
+            data = Oscilloscope_Data.read_csv_file(data_file);
+            obj.readings.(channel_name) = data.Readings;
         end
 
         function current_figure = plot(obj)
