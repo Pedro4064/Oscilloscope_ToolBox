@@ -23,6 +23,11 @@ classdef Oscilloscope_Data
             data_files = dir(path_to_root_file+"/*CH*.csv");
             data_files = struct2table(data_files);
 
+            % Now we need to check if the channel names were passed, if not get default names
+            if nargin < 2
+                channel_names = obj.get_channel_names(data_files);
+            end 
+
             % Read the first file to first populate the table
             ch_1_data = Oscilloscope_Data.read_csv_file(path_to_root_file + "/"+data_files.name{1});
             obj.record_length = Oscilloscope_Data.get_configuration_value(ch_1_data, "Record Lenght");
@@ -39,13 +44,13 @@ classdef Oscilloscope_Data
             obj.firmware_version = Oscilloscope_Data.get_configuration_value(ch_1_data, "Firmware Version");
 
             obj.readings = table();
-            obj.readings.(channel_names(1)) = ch_1_data.Readings;
+            obj.readings.(channel_names{1}) = ch_1_data.Readings;
             obj.time = ch_1_data.Time;
 
             % Now iterate over the rest of the given data files
             for index = 2:height(data_files)
                 data = Oscilloscope_Data.read_csv_file(path_to_root_file + "/" + data_files.name{index});
-                obj.readings.(channel_names(index)) = data.Readings;
+                obj.readings.(channel_names{index}) = data.Readings;
             end
  
         end
@@ -66,6 +71,19 @@ classdef Oscilloscope_Data
 
             legend(obj.readings.Properties.VariableNames);
             current_figure = gcf;
+        end
+    end
+
+    methods (Access = private)
+        function channel_names = get_channel_names(~, dir_listing)
+            % First pre-allocate the cell array to store the channel names
+            channel_names = cell(1, height(dir_listing));
+
+            % Iterate over the names of the files and extract the channel name
+            for i = 1:height(dir_listing)
+                matches = regexp(dir_listing.name{i}, 'CH*[1-9]', 'match');
+                channel_names(i) = matches(1);
+            end
         end
     end
 

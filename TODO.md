@@ -1,6 +1,6 @@
 To be implemented:
-	[] Add Channel data method
-	[] Default channel names - Using the Source metadata
+	[X] Add Channel data method
+	[X] Default channel names - Using the Source metadata
 	[] README.md
 
 Check if possible:
