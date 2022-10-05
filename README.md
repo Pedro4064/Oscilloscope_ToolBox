@@ -32,7 +32,7 @@ To use the toolbox you can either :
     - Then we you need to change into the cloned directory and move the `Oscilloscope_Data.m` file to the directory you are working at (where you are writing you live script, or matlab script file).
 
 2. Download the `Oscilloscope_Data.m` file:
-    - You can access the [Oscilloscope_Data.m](https://raw.githubusercontent.com/Pedro4064/Oscilloscope_ToolBox/master/Oscilloscope_Data.m) file directly and press Cmd+s (if on Mac) or Ctrl+s (if on Windows/Linux) and save the file with the name `Oscilloscope_data.m`, making sure to same with the `.m` extension.
+    - You can access the [Oscilloscope_Data.m](https://raw.githubusercontent.com/Pedro4064/Oscilloscope_ToolBox/master/Oscilloscope_Data.m) file directly and press Cmd+s (if on Mac) or Ctrl+s (if on Windows/Linux) and save the file with the name `Oscilloscope_Data.m`, making sure to same with the `.m` extension.
 
     - Another possibility is to use the command line, already in the working directory, by using:
     ```bash
