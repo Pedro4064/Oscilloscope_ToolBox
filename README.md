@@ -36,7 +36,7 @@ To use the toolbox you can either :
 
     - Another possibility is to use the command line, already in the working directory, by using:
     ```bash
-    curl https://raw.githubusercontent.com/Pedro4064/Oscilloscope_ToolBox/master/Oscilloscope_Data.m > Oscilloscope_data.m
+    curl https://raw.githubusercontent.com/Pedro4064/Oscilloscope_ToolBox/master/Oscilloscope_Data.m > Oscilloscope_Data.m
     ```
 
 
