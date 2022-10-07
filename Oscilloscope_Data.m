@@ -1,4 +1,4 @@
-classdef Oscilloscope_Data
+classdef Oscilloscope_Data < handle
 
     properties 
         record_length
