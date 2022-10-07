@@ -16,7 +16,7 @@ The main use cases are if you need to add the wave forms read into a document/re
 This is the constructor for the Oscilloscope_Data class, which is responsible for parsing all data files in the passed directory. It has as two inputs:
 |Argument Name | Description | Default Value|
 |--------------|-------------|--------------|
-|`path_to_root_directory` | The path to the directory the oscilloscope saved the data, normally it has the following structure: `ALL{0001-1000}`| There is no default value, it is strictly necessary|
+|`path_to_root_directory` | The path to the directory the oscilloscope saved the data, normally it has the following structure: `ALL{0001-1000}`| There is no default value, it is strictly necessary, and you should not add the trailing `/`|
 |`channel_names`| An array of meaningful names for each of the oscilloscope's channels | The default name is the channels names (i.e `ch1`, `ch2`,...) |
 
 It will return an object with the following properties:
@@ -53,6 +53,61 @@ data.plot();
 This method iterates over all the channel columns from the `reading` table and plots them one over another. At the end it still has `hold on`, so any change can be applied to the graph (like title, grid on, legend, etc).
 
 ## Examples
+
+All Examples will be using the data located in `docs/example_data`.
+
+### Simple Plotting
+```matlab
+data = Oscilloscope_Data('docs/example_data/reading_1', {'Nó 1' 'Nó 2'});
+data.plot();
+title("Full Bridge Rectifier");
+xlabel('Seconds (s)'); 
+ylabel('Volts (V)');
+```
+
+Which will result in the figure bellow:
+
+![](/docs/plots/Full_Bridge_2_Nodes.png)
+
+
+### Plotting with Default Channel Names
+```matlab
+data = Oscilloscope_Data('docs/example_data/reading_1');
+data.plot();
+title("Full Bridge Rectifier");
+xlabel('Seconds (s)'); 
+ylabel('Volts (V)');
+```
+
+Which will result in the figure bellow:
+![](/docs/plots/Full_Bridge_2_Default_Nodes.png)
+
+### Adding Extra Channel Data
+In this example we will be adding another plot, so we can show how you can plot using the data and normal plotting function, and not only the method we implemented in the class. This might be useful specially if you want to have sub-plots, etc.
+```matlab
+% Initialize the object and add channel
+data = Oscilloscope_Data('docs/example_data/reading_1', {'Node 1' 'Node 2'});
+data.add_channel_data('Full Bridge Exit', 'docs/example_data/reading_2/F0001CH2.csv');
+
+% Add first subplot
+subplot(2, 1, 1);
+plot(data.time, data.readings.("Node 1"), data.time, data.readings.("Node 2"));
+title("Full Bridge Rectifier Circuit");
+subtitle("Half Rectifier Nodes");
+legend("Node 1", "Node 2");
+grid on;
+
+% Add second subplot
+subplot(2, 1, 2);
+plot(data.time, data.readings.("Full Bridge Exit"));
+subtitle("Full Bridge Exit Node");
+legend("Node 3");
+grid on;
+```
+
+Which will result in the following plot:
+
+![](/docs/plots/Full_Bridge_3_Nodes.png)
 
 # Oscilloscope 
 
