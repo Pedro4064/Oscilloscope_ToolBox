@@ -139,3 +139,8 @@ To use the toolbox you can either :
 
 
 # To Do
+
+In the Future we wish to implement:
+
+- FFT for each channel
+- "Pivot" table with most important data for each channel (e.g peak-to-peak voltage, frequency, ...)
