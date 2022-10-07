@@ -69,8 +69,13 @@ classdef Oscilloscope_Data
 
             end
 
+            % Add Legends
             legend(obj.readings.Properties.VariableNames);
+
+            % Get current plotted figure and change the size
             current_figure = gcf;
+            current_figure.Position(3:4) = [1000, 400];
+            grid on;
         end
     end
 
